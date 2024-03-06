@@ -9,7 +9,7 @@ import { FileListsContext } from '@/app/_context/FileListsContext';
 
 function SideNav() {
 
-  const [activeTeam, setActiveTeam] = useState<TEAM>();
+  const [activeTeam, setActiveTeam] = useState<TEAM | any>();
   const [totalFiles, setTotalFiles] = useState<Number>();
 
   const {fileList_, setFileList_} = useContext(FileListsContext);
