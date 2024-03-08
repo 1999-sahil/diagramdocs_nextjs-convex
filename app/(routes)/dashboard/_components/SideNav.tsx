@@ -25,26 +25,28 @@ function SideNav() {
   }, [activeTeam]);
 
   const onFileCreate = (fileName:string) => {
-    console.log(fileName);
-    createFile({
-      fileName: fileName,
-      teamId: activeTeam?._id,
-      createdBy: user?.email,
-      archived: false,
-      document: "",
-      whiteboard: "",
-    }).then((res) => {
-      if(res) {
-        getFiles();
-        toast("File Created Successfully!!!", {
-          description: "You can change file name later."
+    //console.log(fileName);
+    if(activeTeam && user) {
+      createFile({
+        fileName: fileName,
+        teamId: activeTeam?._id || "",
+        createdBy: user?.email || "",
+        archived: false,
+        document: "",
+        whiteboard: "",
+      }).then((res) => {
+        if(res) {
+          getFiles();
+          toast("File Created Successfully!!!", {
+            description: "You can change file name later."
+          })
+        }
+      }, (e) => {
+        toast("Something went wrong!!!", {
+          description: "Error while creating file."
         })
-      }
-    }, (e) => {
-      toast("Something went wrong!!!", {
-        description: "Error while creating file."
       })
-    })
+    }
   };
 
   const getFiles = async () => {
