@@ -20,6 +20,10 @@ function SideNav() {
 
   const createFile = useMutation(api.files.createFile);
 
+  useEffect(() => {
+    activeTeam && getFiles();
+  }, [activeTeam]);
+
   const onFileCreate = (fileName:string) => {
     console.log(fileName);
     createFile({
@@ -42,10 +46,6 @@ function SideNav() {
       })
     })
   };
-
-  useEffect(() => {
-    activeTeam && getFiles();
-  }, [activeTeam]);
 
   const getFiles = async () => {
     const result = await convex.query(api.files.getFiles, { teamId: activeTeam?._id });
